@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import CookieBanner from "../components/CookieBanner";
 
 interface Props {
   title?: string;
@@ -25,7 +26,7 @@ const localBusinessSchema = {
   "description": "Coiffeuse à domicile avec 15 ans d'expérience. Déplacements autour de Stutzheim, Wasselonne et dans le Bas-Rhin (67).",
   "url": siteUrl,
   "telephone": "+33637737142",
-  "email": "Meisse.samantha@gmail.com",
+  "email": "meisse.samantha@gmail.com",
   "priceRange": "€€",
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Cash, Carte bancaire",
@@ -120,5 +121,6 @@ const localBusinessSchema = {
   </head>
   <body class="min-h-screen">
     <slot />
+    <CookieBanner client:load />
   </body>
 </html>

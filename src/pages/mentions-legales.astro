@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const year = new Date().getFullYear();
+---
+
+<BaseLayout
+  title="Mentions Légales & CGU — S-MH'air"
+  description="Mentions légales, conditions générales d'utilisation et politique de cookies du site S-MH'air, coiffeuse à domicile Samantha Meisse."
+>
+  <!-- Header minimal -->
+  <header class="bg-coffee-bean border-b border-golden-bronze/10 py-6 px-6">
+    <div class="max-w-4xl mx-auto">
+      <a href="/" class="inline-flex items-center gap-2 text-golden-bronze/70 hover:text-golden-bronze transition-colors text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Retour à l'accueil
+      </a>
+    </div>
+  </header>
+
+  <main class="bg-coffee-bean min-h-screen py-16 px-6">
+    <div class="max-w-4xl mx-auto prose prose-invert prose-golden">
+
+      <h1 class="text-4xl font-display text-golden-bronze mb-2">Mentions Légales</h1>
+      <p class="text-lavender-blush/40 text-sm mb-12">Dernière mise à jour : mai {year}</p>
+
+      <!-- Éditeur -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">1. Éditeur du site</h2>
+        <ul class="space-y-2 text-lavender-blush/70 font-light list-none p-0">
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Nom</span> Samantha Meisse</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Activité</span> Coiffeuse à domicile — auto-entrepreneur</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Zone</span> Stutzheim, Wasselonne et alentours — Bas-Rhin (67)</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Téléphone</span> <a href="tel:0637737142" class="text-golden-bronze hover:underline">06 37 73 71 42</a></li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Email</span> <a href="mailto:meisse.samantha@gmail.com" class="text-golden-bronze hover:underline">meisse.samantha@gmail.com</a></li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">SIREN</span> 918 235 623</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">SIRET (siège)</span> 918 235 623 00017</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">RCS</span> 918 235 623 R.C.S. Strasbourg</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Inscription RCS</span> Inscrit au greffe de Strasbourg le 09/08/2022</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Inscription RNE</span> Inscrit le 09/08/2022</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Régime fiscal</span> TVA non applicable — Article 293B du CGI</li>
+        </ul>
+      </section>
+
+      <!-- Hébergeur -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">2. Hébergement</h2>
+        <ul class="space-y-2 text-lavender-blush/70 font-light list-none p-0">
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Hébergeur</span> Vercel Inc.</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Adresse</span> 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Site</span> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-golden-bronze hover:underline">vercel.com</a></li>
+        </ul>
+      </section>
+
+      <!-- Conception -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">3. Conception & Développement</h2>
+        <ul class="space-y-2 text-lavender-blush/70 font-light list-none p-0">
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Designer</span> Erin SUPIOT</li>
+          <li><span class="text-lavender-blush/40 text-xs uppercase tracking-widest mr-2">Technologies</span> Astro, React, Tailwind CSS</li>
+        </ul>
+      </section>
+
+      <!-- Propriété intellectuelle -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">4. Propriété intellectuelle</h2>
+        <p class="text-lavender-blush/70 font-light leading-relaxed">
+          L'ensemble des contenus présents sur ce site (textes, images, logo, design) sont la propriété exclusive de Samantha Meisse et d'Erin SUPIOT, sauf mentions contraires. Toute reproduction, distribution ou utilisation sans autorisation écrite préalable est interdite.
+        </p>
+      </section>
+
+      <!-- Données personnelles -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">5. Données personnelles (RGPD)</h2>
+        <p class="text-lavender-blush/70 font-light leading-relaxed">
+          Les informations saisies dans le formulaire de contact (prénom, téléphone, adresse, disponibilités) sont transmises directement à Samantha Meisse via WhatsApp ou SMS et ne sont pas stockées sur un serveur tiers.
+        </p>
+        <p class="text-lavender-blush/70 font-light leading-relaxed mt-4">
+          Conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679), vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez : <a href="mailto:meisse.samantha@gmail.com" class="text-golden-bronze hover:underline">meisse.samantha@gmail.com</a>
+        </p>
+      </section>
+
+      <!-- Cookies -->
+      <section class="mb-12" id="cookies">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">6. Politique de cookies</h2>
+        <p class="text-lavender-blush/70 font-light leading-relaxed">
+          Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement (mémorisation de votre choix de consentement). Aucun cookie publicitaire, de traçage ou analytique tiers n'est déposé.
+        </p>
+        <div class="mt-6 overflow-x-auto">
+          <table class="w-full text-sm text-lavender-blush/70 border-collapse">
+            <thead>
+              <tr class="border-b border-golden-bronze/20">
+                <th class="text-left py-2 pr-4 text-golden-bronze font-semibold">Cookie</th>
+                <th class="text-left py-2 pr-4 text-golden-bronze font-semibold">Finalité</th>
+                <th class="text-left py-2 text-golden-bronze font-semibold">Durée</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-lavender-blush/10">
+                <td class="py-3 pr-4 font-mono text-xs">cookie-consent</td>
+                <td class="py-3 pr-4">Mémorise votre choix d'acceptation ou de refus</td>
+                <td class="py-3">Jusqu'à suppression manuelle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-lavender-blush/50 text-sm mt-4 italic">
+          Vous pouvez retirer votre consentement à tout moment en effaçant les données de navigation de votre navigateur.
+        </p>
+      </section>
+
+      <!-- Responsabilité -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">7. Limitation de responsabilité</h2>
+        <p class="text-lavender-blush/70 font-light leading-relaxed">
+          Samantha Meisse s'efforce de maintenir les informations du site à jour (tarifs, disponibilités, zone d'intervention). Toutefois, ces informations sont données à titre indicatif et peuvent évoluer. Aucune responsabilité ne saurait être engagée en cas d'erreur ou d'omission.
+        </p>
+      </section>
+
+      <!-- Droit applicable -->
+      <section class="mb-12">
+        <h2 class="text-xl font-display text-golden-bronze mb-4 pb-2 border-b border-golden-bronze/20">8. Droit applicable</h2>
+        <p class="text-lavender-blush/70 font-light leading-relaxed">
+          Le présent site et ses mentions légales sont soumis au droit français. En cas de litige, les tribunaux français seront seuls compétents.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer minimal -->
+  <footer class="bg-coffee-bean border-t border-lavender-blush/5 py-6 text-center text-lavender-blush/30 text-xs tracking-widest uppercase">
+    <p>© {year} S-MH'air · <a href="/" class="hover:text-golden-bronze transition-colors">Retour à l'accueil</a></p>
+  </footer>
+</BaseLayout>

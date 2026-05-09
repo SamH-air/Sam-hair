@@ -1,0 +1,75 @@
+---
+// Pas de JS client — animations CSS pures
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-coffee-bean">
+  <!-- Image de fond avec overlay fort pour contraste maximal -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-coffee-bean/80 via-coffee-bean/60 to-coffee-bean z-10"></div>
+    <img
+      src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2000&auto=format&fit=crop"
+      alt="Coiffeuse à domicile S-MH'air — Samantha Meisse, région de Wasselonne et Stutzheim"
+      class="w-full h-full object-cover scale-105"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+      width="2000"
+      height="1333"
+    />
+  </div>
+
+  <!-- Contenu centré -->
+  <div class="relative z-20 text-center px-6 max-w-2xl w-full py-32 md:py-0">
+
+    <!-- Badge expérience -->
+    <span class="inline-block border border-golden-bronze/40 text-golden-bronze text-xs tracking-[0.25em] uppercase px-4 py-1.5 rounded-full mb-8 animate-fade-up-1">
+      Samantha Meisse · 15 ans d'expérience
+    </span>
+
+    <!-- Titre principal -->
+    <h1 class="text-5xl md:text-7xl font-display text-white font-light leading-tight mb-6 animate-fade-up-2">
+      Un moment<br />rien que pour vous,
+      <br /><em class="text-golden-bronze not-italic">à votre porte</em>
+    </h1>
+
+    <!-- Accroche -->
+    <p class="text-white/70 text-lg md:text-xl font-light leading-relaxed mb-10 animate-fade-up-2">
+      Profitez d'une coiffure haut de gamme dans le confort et l'intimité de votre foyer.
+      <br class="hidden md:block" />
+      Sans déplacement. Sans stress. Rien que pour vous.
+    </p>
+
+    <!-- CTA mobile-first : appel direct + formulaire -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up-3">
+      <!-- Bouton appel — priorité mobile -->
+      <a
+        href="tel:0637737142"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-golden-bronze text-coffee-bean font-semibold rounded-full text-base transition-all duration-300 hover:bg-white hover:scale-105 active:scale-95"
+      >
+        <!-- Icône téléphone -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+        </svg>
+        Appeler maintenant
+      </a>
+
+      <!-- Bouton formulaire -->
+      <a
+        href="#contact-form"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/30 text-white font-medium rounded-full text-base transition-all duration-300 hover:border-golden-bronze hover:text-golden-bronze active:scale-95"
+      >
+        Demander un rendez-vous
+      </a>
+    </div>
+
+    <!-- Zone géo -->
+    <p class="mt-8 text-white/35 text-xs tracking-[0.3em] uppercase animate-fade-up-3">
+      Stutzheim · Wasselonne · alentours — Bas-Rhin (67)
+    </p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-scroll-pulse" aria-hidden="true">
+    <div class="w-[1px] h-10 bg-golden-bronze/30 mx-auto"></div>
+  </div>
+</section>

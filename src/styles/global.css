@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Cinzel:wght@400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", "Cinzel", serif;
+  --font-sans: "Montserrat", sans-serif;
+
+  --color-lavender-blush: #f6e8eaff;
+  --color-bubblegum-pink: #ef626cff;
+  --color-coffee-bean: #22181cff;
+  --color-graphite: #312f2fff;
+  --color-golden-bronze: #c5a643ff;
+}
+
+@layer base {
+  body {
+    @apply bg-coffee-bean text-lavender-blush font-sans antialiased selection:bg-golden-bronze selection:text-coffee-bean;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-golden-bronze;
+  }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { @apply bg-coffee-bean; }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-graphite rounded-full border-2 border-coffee-bean hover:bg-golden-bronze;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 px-6 md:px-12 lg:px-24;
+  }
+
+  .glass-card {
+    @apply bg-graphite/40 backdrop-blur-md border border-lavender-blush/10 rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-golden-bronze text-coffee-bean font-semibold rounded-full transition-all duration-300 hover:bg-lavender-blush hover:scale-105 active:scale-95;
+  }
+
+  .nav-link {
+    @apply text-lavender-blush/70 hover:text-golden-bronze transition-colors duration-200 font-medium tracking-wide uppercase text-xs;
+  }
+}
+
+/* Entry animations (remplace framer-motion) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
+
+.animate-fade-up-1 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s; opacity: 0; }
+.animate-fade-up-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.4s; opacity: 0; }
+.animate-fade-up-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.6s; opacity: 0; }
+.animate-scroll-pulse { animation: scrollPulse 2s ease-in-out infinite; }

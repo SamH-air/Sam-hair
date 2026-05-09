@@ -1,0 +1,27 @@
+---
+import BaseLayout    from "../layouts/BaseLayout.astro";
+import Header        from "../components/Header";
+import Hero          from "../components/Hero.astro";
+import Services      from "../components/Services.astro";
+import Pricing       from "../components/Pricing.astro";
+import Gallery       from "../components/Gallery.astro";
+import ContactForm   from "../components/ContactForm";
+import Footer        from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="S-MH'air — Coiffeuse à Domicile | Stutzheim, Wasselonne & Bas-Rhin (67)"
+  description="Coiffeuse à domicile avec 15 ans d'expérience. Samantha Meisse se déplace chez vous autour de Stutzheim, Wasselonne et alentours (67). Coupes, colorations, soins. Sur rendez-vous au 06 37 73 71 42."
+>
+  <Header client:load />
+
+  <main>
+    <Hero />
+    <Services />
+    <Pricing />
+    <Gallery />
+    <ContactForm client:visible />
+  </main>
+
+  <Footer />
+</BaseLayout>

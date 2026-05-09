@@ -1,0 +1,49 @@
+---
+import { PRICING } from "../data/pricing";
+---
+
+<section id="tarifs" class="section-padding" aria-labelledby="pricing-heading">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-xl mb-16">
+      <h2 id="pricing-heading" class="text-3xl md:text-5xl mb-4">La Carte des Tarifs</h2>
+      <p class="text-lavender-blush/60 font-light">
+        Des prestations sur mesure pour toute la famille. Le soin est offert pour toute prestation technique.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
+      {PRICING.map((category) => (
+        <div class="border-b border-lavender-blush/10 pb-8">
+          <h3 class="text-sm font-sans uppercase tracking-[0.2em] text-golden-bronze mb-6 font-semibold">
+            {category.category}
+          </h3>
+          <ul class="space-y-4">
+            {category.items.map((item) => (
+              <li class="group">
+                <div class="flex justify-between items-end">
+                  <span class="text-lavender-blush/80 group-hover:text-lavender-blush transition-colors">{item.name}</span>
+                  <div class="flex-1 border-b border-dotted border-lavender-blush/20 mx-4 mb-1" aria-hidden="true"></div>
+                  <span class="font-display text-lg text-golden-bronze whitespace-nowrap">{item.price}</span>
+                </div>
+                {item.note && (
+                  <p class="mt-1 text-xs italic text-golden-bronze/50">* {item.note}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 p-8 glass-card border-golden-bronze/30 text-center">
+      <p class="text-lavender-blush/70 italic text-lg leading-relaxed">
+        Note technique&nbsp;: <strong class="text-golden-bronze font-semibold">Balayage, Couleur, Babylight sur devis.</strong><br />
+        Pour un diagnostic personnalisé, n'hésitez pas à nous contacter.
+      </p>
+    </div>
+
+    <p class="mt-8 text-center text-lavender-blush/30 text-xs tracking-widest uppercase">
+      TVA non applicable en vertu de l'article 293B du CGI
+    </p>
+  </div>
+</section>

@@ -1,0 +1,124 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "S-MH'air — Coiffeuse à Domicile | Stutzheim, Wasselonne & Bas-Rhin (67)",
+  description = "Coiffeuse à domicile avec 15 ans d'expérience. Samantha Meisse se déplace chez vous autour de Stutzheim, Wasselonne et alentours (67). Coupes, colorations, balayage, soins. Sur rendez-vous au 06 37 73 71 42.",
+  canonicalUrl = Astro.url.href,
+  ogImage = "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+} = Astro.props;
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "S-MH'air",
+  "alternateName": "S2MHair",
+  "description": "Coiffeuse à domicile avec 15 ans d'expérience. Déplacements autour de Stutzheim, Wasselonne et dans le Bas-Rhin (67).",
+  "url": siteUrl,
+  "telephone": "+33637737142",
+  "email": "Meisse.samantha@gmail.com",
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Carte bancaire",
+  "openingHours": "Mo-Sa",
+  "image": ogImage,
+  "sameAs": [
+    "https://www.facebook.com/people/S2MHair/61573298836918/"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Samantha Meisse",
+    "jobTitle": "Coiffeuse à domicile",
+    "knowsAbout": ["Coupe de cheveux", "Coloration", "Balayage", "Babylight", "Brushing", "Patine", "Soins capillaires"]
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Stutzheim-Offenheim", "containedInPlace": { "@type": "AdministrativeArea", "name": "Bas-Rhin", "postalCode": "67370" } },
+    { "@type": "City", "name": "Wasselonne", "containedInPlace": { "@type": "AdministrativeArea", "name": "Bas-Rhin", "postalCode": "67310" } },
+    { "@type": "AdministrativeArea", "name": "Bas-Rhin", "identifier": "67" }
+  ],
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 48.6357, "longitude": 7.4447 },
+    "geoRadius": "20000"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Prestations de coiffure à domicile",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coupe enfant", "description": "Coupe garçon dès 15€, fille dès 18€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coupe ado", "description": "Coupe garçon 19€, fille 24€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coupe homme", "description": "Coupe 24€, coupe + barbe 35€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coupe femme avec brushing", "description": "Court 40€, mi-long 45€, long 50€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brushing seul", "description": "Court 28€, mi-long 34€, long à partir de 40€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Patine", "description": "Court 15€, mi-long 20€, long 25€" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coloration, Balayage, Babylight", "description": "Sur devis après diagnostic personnalisé" } }
+    ]
+  }
+};
+---
+
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Titre & description -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Samantha Meisse" />
+    <meta name="keywords" content="coiffeuse à domicile, Wasselonne, Stutzheim, Bas-Rhin, 67, coupe cheveux domicile, balayage domicile, coloration domicile, S-MH'air, Samantha Meisse" />
+
+    <!-- Géolocalisation -->
+    <meta name="geo.region" content="FR-67" />
+    <meta name="geo.placename" content="Wasselonne, Bas-Rhin, Alsace" />
+    <meta name="geo.position" content="48.6357;7.4447" />
+    <meta name="ICBM" content="48.6357, 7.4447" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/samH'air.ico" />
+    <link rel="shortcut icon" href="/assets/samH'air.ico" />
+    <meta name="theme-color" content="#22181c" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="S-MH'air" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="Coiffeuse à domicile S-MH'air — Samantha Meisse, région de Wasselonne et Stutzheim (67)" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </head>
+  <body class="min-h-screen">
+    <slot />
+  </body>
+</html>

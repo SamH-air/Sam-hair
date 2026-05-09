@@ -1,0 +1,33 @@
+---
+import { GALLERY } from "../data/gallery";
+---
+
+<section id="galerie" class="section-padding bg-graphite/30" aria-labelledby="gallery-heading">
+  <div class="max-w-7xl mx-auto text-center mb-16">
+    <h2 id="gallery-heading" class="text-3xl md:text-5xl mb-4">Galerie</h2>
+    <div class="w-24 h-1 bg-golden-bronze mx-auto" aria-hidden="true"></div>
+    <p class="mt-6 text-lavender-blush/50 text-sm italic">Réalisations de Samantha Meisse — à votre domicile</p>
+  </div>
+
+  <ul class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 list-none p-0 auto-rows-[220px] md:auto-rows-[260px]">
+    {GALLERY.map((img, index) => {
+      // 1re et 6e photo en grande tuile (2 colonnes)
+      const wide = index === 0 || index === 5;
+      return (
+        <li class={`relative overflow-hidden rounded-2xl group cursor-pointer ${wide ? "col-span-2" : "col-span-1"}`}>
+          <img
+            src={img.url}
+            alt={img.alt}
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading={index < 3 ? "eager" : "lazy"}
+            decoding="async"
+          />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-coffee-bean/90 via-coffee-bean/40 to-transparent px-5 py-4 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+            <p class="text-golden-bronze font-display text-base md:text-lg leading-tight">{img.title}</p>
+            <p class="text-lavender-blush/70 text-xs mt-0.5 tracking-wide">{img.prestation}</p>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</section>

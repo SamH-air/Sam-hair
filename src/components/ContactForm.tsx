@@ -168,7 +168,7 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <div className="glass-card p-8 md:p-12 space-y-10">
+        <div className="glass-card p-4 sm:p-8 md:p-12 space-y-10">
           {/* Identité */}
           <fieldset className="space-y-4">
             <legend className="text-golden-bronze text-xs uppercase tracking-widest font-semibold mb-4">
@@ -192,8 +192,8 @@ export default function ContactForm() {
                 autoComplete="tel"
               />
             </div>
-            <div className="flex items-center gap-4">
-              <label className="text-lavender-blush/60 text-sm whitespace-nowrap">
+            <div className="flex flex-wrap items-center gap-3">
+              <label className="text-lavender-blush/60 text-sm">
                 Nombre de personnes *
               </label>
               <div className="flex items-center gap-3">

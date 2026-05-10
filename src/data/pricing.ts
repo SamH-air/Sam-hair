@@ -58,7 +58,13 @@ export const PRICING: PricingCategory[] = [
   {
     category: "Mariage & Événement",
     items: [
-      { name: "Coiffure de mariée / événement", price: "200 €", note: "Essai coiffure inclus, déplacement compris" }
+      { name: "Coiffure de mariée / événement", price: "200 €", note: "Essai coiffure inclus" }
+    ]
+  },
+  {
+    category: "Déplacement",
+    items: [
+      { name: "Frais de déplacement", price: "À convenir" }
     ]
   }
 ];

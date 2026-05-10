@@ -9,13 +9,13 @@ export const GALLERY: GalleryImage[] = [
   {
     url: "/assets/mariage.jpg",
     title: "Mariage & Événement",
-    alt: "Coiffure de mariée réalisée à domicile par Samantha Meisse — S-MH'air",
+    alt: "Coiffure de mariée réalisée à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coiffure de mariée · Essai inclus · 200 €"
   },
   {
     url: "/assets/femme-chignon.jfif",
     title: "Chignon Femme",
-    alt: "Chignon élégant réalisé à domicile par Samantha Meisse — S-MH'air",
+    alt: "Chignon élégant réalisé à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coiffage & Mise en forme · Mariage & Événement"
   },
   {
@@ -33,13 +33,13 @@ export const GALLERY: GalleryImage[] = [
   {
     url: "/assets/femme.jpg",
     title: "Coupe Femme",
-    alt: "Coupe femme avec brushing réalisée à domicile par Samantha Meisse — S-MH'air",
+    alt: "Coupe femme avec brushing réalisée à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coupe femme + Brushing · à partir de 40 €"
   },
   {
     url: "/assets/femme-2.jpg",
     title: "Coiffage Femme",
-    alt: "Coiffage femme à domicile par Samantha Meisse — S-MH'air",
+    alt: "Coiffage femme à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coupe femme + Brushing · à partir de 40 €"
   },
   {
@@ -57,13 +57,13 @@ export const GALLERY: GalleryImage[] = [
   {
     url: "/assets/coupe-enfant.jfif",
     title: "Coupe Enfant",
-    alt: "Coupe enfant à domicile par Samantha Meisse — S-MH'air",
+    alt: "Coupe enfant à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coupe enfant · dès 15 €"
   },
   {
     url: "/assets/coupe-enfant1.jfif",
     title: "Coupe Enfant",
-    alt: "Coupe enfant à domicile par Samantha Meisse — S-MH'air",
+    alt: "Coupe enfant à domicile par Samantha Huoy — S-MH'air",
     prestation: "Coupe enfant · dès 15 €"
   }
 ];

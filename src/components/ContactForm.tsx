@@ -51,6 +51,7 @@ function Checkbox({
     <button
       type="button"
       onClick={onChange}
+      aria-pressed={checked}
       className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm text-left transition-all duration-200 ${
         checked
           ? "border-golden-bronze bg-golden-bronze/10 text-golden-bronze"
@@ -145,7 +146,7 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    "w-full bg-graphite/40 border border-lavender-blush/15 rounded-xl px-4 py-3 text-lavender-blush placeholder:text-lavender-blush/30 focus:outline-none focus:border-golden-bronze/60 transition-colors";
+    "w-full bg-graphite/40 border border-lavender-blush/15 rounded-xl px-4 py-3 text-lavender-blush placeholder:text-lavender-blush/50 focus:outline-none focus:border-golden-bronze/60 transition-colors";
 
   return (
     <section
@@ -161,10 +162,13 @@ export default function ContactForm() {
           >
             Prendre rendez-vous
           </h2>
-          <div className="w-24 h-1 bg-golden-bronze mx-auto" />
+          <div className="w-24 h-1 bg-golden-bronze mx-auto" aria-hidden="true" />
           <p className="mt-6 text-lavender-blush/60 font-light">
             Remplissez le formulaire — le message sera envoyé directement à
             Samantha.
+          </p>
+          <p className="mt-2 text-lavender-blush/60 text-xs">
+            Les champs marqués d'un astérisque (*) sont obligatoires.
           </p>
         </div>
 
@@ -175,15 +179,21 @@ export default function ContactForm() {
               Vos coordonnées
             </legend>
             <div className="grid sm:grid-cols-2 gap-4">
+              <label htmlFor="cf-prenom" className="sr-only">Prénom (obligatoire)</label>
               <input
+                id="cf-prenom"
                 type="text"
+                required
+                aria-required="true"
                 placeholder="Prénom *"
                 value={form.nom}
                 onChange={(e) => setForm({ ...form, nom: e.target.value })}
                 className={inputClass}
                 autoComplete="given-name"
               />
+              <label htmlFor="cf-telephone" className="sr-only">Téléphone</label>
               <input
+                id="cf-telephone"
                 type="tel"
                 placeholder="Téléphone"
                 value={form.telephone}
@@ -193,26 +203,26 @@ export default function ContactForm() {
               />
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <label className="text-lavender-blush/60 text-sm">
+              <span id="cf-personnes-label" className="text-lavender-blush/60 text-sm">
                 Nombre de personnes *
-              </label>
-              <div className="flex items-center gap-3">
+              </span>
+              <div className="flex items-center gap-3" role="group" aria-labelledby="cf-personnes-label">
                 <button
                   type="button"
                   onClick={() => setForm((p) => ({ ...p, personnes: String(Math.max(1, Number(p.personnes) - 1)) }))}
                   className="w-9 h-9 rounded-full border border-lavender-blush/20 text-golden-bronze hover:border-golden-bronze/60 transition-colors text-lg font-bold flex items-center justify-center"
-                  aria-label="Diminuer"
+                  aria-label="Retirer une personne"
                 >
                   −
                 </button>
-                <span className="text-lavender-blush font-display text-xl w-6 text-center">
+                <span className="text-lavender-blush font-display text-xl w-6 text-center" aria-live="polite" aria-atomic="true">
                   {form.personnes}
                 </span>
                 <button
                   type="button"
                   onClick={() => setForm((p) => ({ ...p, personnes: String(Number(p.personnes) + 1) }))}
                   className="w-9 h-9 rounded-full border border-lavender-blush/20 text-golden-bronze hover:border-golden-bronze/60 transition-colors text-lg font-bold flex items-center justify-center"
-                  aria-label="Augmenter"
+                  aria-label="Ajouter une personne"
                 >
                   +
                 </button>
@@ -242,8 +252,12 @@ export default function ContactForm() {
             <legend className="text-golden-bronze text-xs uppercase tracking-widest font-semibold mb-4">
               Lieu de la prestation *
             </legend>
+            <label htmlFor="cf-adresse" className="sr-only">Adresse complète de la prestation (obligatoire)</label>
             <input
+              id="cf-adresse"
               type="text"
+              required
+              aria-required="true"
               placeholder="Votre adresse complète (rue, ville, code postal)"
               value={form.adresse}
               onChange={(e) => setForm({ ...form, adresse: e.target.value })}
@@ -274,7 +288,9 @@ export default function ContactForm() {
             <legend className="text-golden-bronze text-xs uppercase tracking-widest font-semibold mb-4">
               Message (facultatif)
             </legend>
+            <label htmlFor="cf-message" className="sr-only">Message</label>
             <textarea
+              id="cf-message"
               placeholder="Précisions, longueur des cheveux, demande particulière…"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -295,10 +311,11 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={sendWhatsApp}
-              className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] text-white font-semibold rounded-full transition-all duration-300 hover:brightness-110 hover:scale-105 active:scale-95"
+              className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] text-coffee-bean font-semibold rounded-full transition-all duration-300 hover:brightness-110 hover:scale-105 active:scale-95"
             >
               <MessageCircle className="w-5 h-5" />
               Envoyer via WhatsApp
+              <span className="sr-only">(ouvre WhatsApp dans un nouvel onglet)</span>
             </button>
             <button
               type="button"
@@ -310,7 +327,7 @@ export default function ContactForm() {
             </button>
           </div>
 
-          <p className="text-center text-lavender-blush/30 text-xs">
+          <p className="text-center text-lavender-blush/60 text-xs">
             Le SMS fonctionne uniquement depuis un mobile.
           </p>
         </div>

@@ -21,6 +21,12 @@
     @apply font-display tracking-tight text-golden-bronze;
   }
 
+  /* Focus clavier bien visible sur fond sombre */
+  :focus-visible {
+    outline: 2px solid var(--color-golden-bronze);
+    outline-offset: 3px;
+  }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { @apply bg-coffee-bean; }
   ::-webkit-scrollbar-thumb {
@@ -39,6 +45,11 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-8 py-4 bg-golden-bronze text-coffee-bean font-semibold rounded-full transition-all duration-300 hover:bg-lavender-blush hover:scale-105 active:scale-95;
+  }
+
+  /* Lien d'évitement : visible uniquement au focus clavier */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-5 focus:py-3 focus:rounded-full focus:bg-golden-bronze focus:text-coffee-bean focus:font-semibold;
   }
 
   .nav-link {
@@ -61,3 +72,13 @@
 .animate-fade-up-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.4s; opacity: 0; }
 .animate-fade-up-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.6s; opacity: 0; }
 .animate-scroll-pulse { animation: scrollPulse 2s ease-in-out infinite; }
+
+/* Respect de la préférence « réduire les animations » */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up-1, .animate-fade-up-2, .animate-fade-up-3 { animation: none; opacity: 1; }
+  .animate-scroll-pulse { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://smhair.fr', // à mettre à jour avec le vrai domaine
+  site: 'https://samhair.vercel.app',
   integrations: [
     react(),
     sitemap({

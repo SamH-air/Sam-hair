@@ -2,15 +2,18 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const NAV_ITEMS = [
-  { name: "Services", href: "#services" },
-  { name: "Tarifs",   href: "#tarifs" },
-  { name: "Galerie",  href: "#galerie" },
-  { name: "Contact",  href: "#contact-form" }
+  { name: "Services",     href: "/#services" },
+  { name: "Tarifs",       href: "/#tarifs" },
+  { name: "Réalisations", href: "/realisations/" },
+  { name: "Contact",      href: "/#contact-form" }
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
+  const [path, setPath]             = useState("");
+
+  useEffect(() => setPath(window.location.pathname), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -27,13 +30,13 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#" aria-label="S-MH'air — Accueil">
-          <img src="/assets/logo.png" alt="Logo S-MH'air" class="h-12 md:h-14 w-auto" />
+        <a href="/" aria-label="S-MH'air — Accueil">
+          <img src="/assets/logo-web.png" alt="" className="h-12 md:h-14 w-auto" width="294" height="180" />
         </a>
 
         <nav className="hidden md:flex gap-8" aria-label="Navigation principale">
           {NAV_ITEMS.map((item) => (
-            <a key={item.name} href={item.href} className="nav-link">
+            <a key={item.name} href={item.href} className="nav-link" aria-current={item.href === path ? "page" : undefined}>
               {item.name}
             </a>
           ))}
@@ -43,6 +46,7 @@ export default function Header() {
           className="md:hidden text-golden-bronze"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
+          aria-controls="menu-mobile"
           aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -51,6 +55,7 @@ export default function Header() {
 
       {isMenuOpen && (
         <nav
+          id="menu-mobile"
           className="md:hidden absolute top-full left-0 right-0 bg-coffee-bean border-b border-golden-bronze/20 p-6 flex flex-col gap-4"
           aria-label="Navigation mobile"
         >
@@ -58,7 +63,8 @@ export default function Header() {
             <a
               key={item.name}
               href={item.href}
-              className="nav-link text-lg"
+              className="nav-link text-lg py-1"
+              aria-current={item.href === path ? "page" : undefined}
               onClick={() => setIsMenuOpen(false)}
             >
               {item.name}

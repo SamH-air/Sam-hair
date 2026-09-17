@@ -1,0 +1,308 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header     from "../components/Header";
+import Footer     from "../components/Footer.astro";
+import { GALLERY, GALLERY_CATEGORIES } from "../data/gallery";
+
+const countFor = (id: string) => GALLERY.filter((img) => img.category === id).length;
+
+const siteUrl  = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const pageUrl  = `${siteUrl}/realisations/`;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Réalisations de S-MH'air — coiffeuse à domicile",
+    "url": pageUrl,
+    "inLanguage": "fr-FR",
+    "isPartOf": { "@type": "WebSite", "name": "S-MH'air", "url": `${siteUrl}/` },
+    "mainEntity": {
+      "@type": "ImageGallery",
+      "name": "Réalisations coiffure à domicile — Stutzheim, Wasselonne (67)",
+      "numberOfItems": GALLERY.length,
+      "image": GALLERY.map((img) => ({
+        "@type": "ImageObject",
+        "contentUrl": `${siteUrl}${img.url}`,
+        "name": img.title,
+        "description": img.alt,
+        "width": img.width,
+        "height": img.height,
+        "creator": { "@type": "Person", "name": "Samantha Huoy" },
+        "copyrightNotice": "© S-MH'air"
+      }))
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil",      "item": `${siteUrl}/` },
+      { "@type": "ListItem", "position": 2, "name": "Réalisations", "item": pageUrl }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Réalisations coiffure à domicile (67) | S-MH'air"
+  description="Photos avant / après de Samantha Huoy, coiffeuse à domicile à Stutzheim et Wasselonne (67) : mariages, balayages, colorations, coupes femme, homme, enfant."
+  schema={schema}
+>
+  <Header client:load />
+
+  <main id="contenu" tabindex="-1" class="bg-coffee-bean min-h-screen">
+    <section class="section-padding pt-36 md:pt-40" aria-labelledby="realisations-heading">
+      <div class="max-w-7xl mx-auto text-center mb-12">
+        <nav aria-label="Fil d'Ariane" class="mb-6 text-xs tracking-widest uppercase text-lavender-blush/60">
+          <ol class="flex justify-center gap-2 list-none p-0">
+            <li><a href="/" class="hover:text-golden-bronze transition-colors">Accueil</a></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="text-golden-bronze">Réalisations</li>
+          </ol>
+        </nav>
+        <h1 id="realisations-heading" class="text-4xl md:text-6xl mb-4">Nos réalisations</h1>
+        <div class="w-24 h-1 bg-golden-bronze mx-auto" aria-hidden="true"></div>
+        <p class="mt-6 text-lavender-blush/60 font-light max-w-2xl mx-auto leading-relaxed">
+          Chignons de mariée, balayages, colorations et coupes pour toute la famille —
+          toutes ces coiffures ont été réalisées par Samantha, directement au domicile de ses clientes et clients.
+        </p>
+      </div>
+
+      <!-- Filtres -->
+      <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-2 md:gap-3 mb-10" role="group" aria-label="Filtrer les réalisations">
+        <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">
+          Tout <span class="filter-count">{GALLERY.length}</span>
+        </button>
+        {GALLERY_CATEGORIES.map((cat) => (
+          <button type="button" class="filter-btn" data-filter={cat.id} aria-pressed="false">
+            {cat.label} <span class="filter-count">{countFor(cat.id)}</span>
+          </button>
+        ))}
+      </div>
+      <p id="filter-status" class="sr-only" aria-live="polite"></p>
+
+      <!-- Grille (masonry en colonnes CSS : les photos gardent leurs proportions) -->
+      <ul id="realisations-grid" class="max-w-7xl mx-auto columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-5 list-none p-0">
+        {GALLERY.map((img, index) => (
+          <li class="gallery-item break-inside-avoid mb-3 md:mb-5" data-category={img.category}>
+            <button
+              type="button"
+              class="relative block w-full overflow-hidden rounded-2xl group text-left cursor-zoom-in"
+              data-index={index}
+              aria-haspopup="dialog"
+              aria-label={`Agrandir la photo « ${img.title} » : ${img.alt}`}
+            >
+              <img
+                src={img.url}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                class="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                loading={index < 4 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              {img.beforeAfter && (
+                <span aria-hidden="true" class="absolute top-2.5 left-2.5 bg-coffee-bean/80 text-golden-bronze text-[9px] md:text-[10px] tracking-[0.2em] uppercase px-2 py-1 rounded-full">
+                  Avant / Après
+                </span>
+              )}
+              <div aria-hidden="true" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-coffee-bean/90 via-coffee-bean/40 to-transparent px-3 md:px-4 pt-8 pb-3">
+                <p class="text-golden-bronze font-display text-sm md:text-base leading-tight">{img.title}</p>
+                <p class="hidden sm:block text-lavender-blush/70 text-[11px] mt-0.5 tracking-wide">{img.prestation}</p>
+              </div>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Appel à l'action -->
+      <div class="max-w-3xl mx-auto text-center mt-20 glass-card px-6 py-10 md:px-12">
+        <h2 class="text-2xl md:text-3xl mb-3">Une coiffure vous plaît&nbsp;?</h2>
+        <p class="text-lavender-blush/60 font-light mb-8">
+          Samantha se déplace chez vous autour de Stutzheim, Wasselonne et dans le Bas-Rhin.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="tel:0637737142" class="btn-primary w-full sm:w-auto">Appeler le 06 37 73 71 42</a>
+          <a href="/#contact-form" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-lavender-blush/30 text-lavender-blush rounded-full transition-all duration-300 hover:border-golden-bronze hover:text-golden-bronze">
+            Demander un rendez-vous
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Visionneuse -->
+  <dialog id="lightbox" class="lightbox" aria-label="Visionneuse de réalisations">
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-close" data-action="close" aria-label="Fermer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+      </button>
+      <button type="button" class="lightbox-nav left-2 md:left-6" data-action="prev" aria-label="Photo précédente">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+      </button>
+      <figure class="flex flex-col items-center gap-4 max-w-full">
+        <img id="lightbox-img" src="" alt="" class="max-h-[78vh] max-w-full w-auto rounded-xl object-contain" />
+        <figcaption class="text-center px-12">
+          <p id="lightbox-title" class="text-golden-bronze font-display text-lg md:text-xl"></p>
+          <p id="lightbox-prestation" class="text-lavender-blush/60 text-xs md:text-sm mt-1"></p>
+          <p id="lightbox-counter" class="text-lavender-blush/60 text-xs mt-2 tracking-widest" aria-live="polite"></p>
+        </figcaption>
+      </figure>
+      <button type="button" class="lightbox-nav right-2 md:right-6" data-action="next" aria-label="Photo suivante">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </button>
+    </div>
+  </dialog>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(246 232 234 / 0.15);
+    color: rgb(246 232 234 / 0.7);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover { border-color: var(--color-golden-bronze); color: var(--color-golden-bronze); }
+  .filter-btn[aria-pressed="true"] {
+    background: var(--color-golden-bronze);
+    border-color: var(--color-golden-bronze);
+    color: var(--color-coffee-bean);
+    font-weight: 600;
+  }
+  .filter-count { opacity: 0.85; font-size: 0.7rem; }
+
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(34 24 28 / 0.96);
+    color: inherit;
+  }
+  .lightbox::backdrop { background: rgb(0 0 0 / 0.6); }
+  .lightbox-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem 1.5rem;
+  }
+  .lightbox-close,
+  .lightbox-nav {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: rgb(49 47 47 / 0.7);
+    color: var(--color-golden-bronze);
+    transition: background 0.2s ease;
+    z-index: 1;
+  }
+  .lightbox-close:hover,
+  .lightbox-nav:hover { background: var(--color-graphite); }
+  .lightbox-close { top: max(1rem, env(safe-area-inset-top)); right: 1rem; }
+  .lightbox-nav { top: 50%; transform: translateY(-50%); }
+</style>
+
+<script>
+  import { GALLERY } from "../data/gallery";
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const items   = document.querySelectorAll<HTMLLIElement>(".gallery-item");
+  const dialog  = document.getElementById("lightbox") as HTMLDialogElement;
+  const imgEl   = document.getElementById("lightbox-img") as HTMLImageElement;
+  const titleEl = document.getElementById("lightbox-title")!;
+  const prestEl = document.getElementById("lightbox-prestation")!;
+  const countEl = document.getElementById("lightbox-counter")!;
+  const statusEl = document.getElementById("filter-status")!;
+
+  let visible: number[] = GALLERY.map((_, i) => i);
+  let position = 0;
+
+  // — Filtres —
+  function applyFilter(filter: string) {
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === filter)));
+    visible = [];
+    items.forEach((li, i) => {
+      const show = filter === "all" || li.dataset.category === filter;
+      li.hidden = !show;
+      if (show) visible.push(i);
+    });
+    const label = [...buttons].find((b) => b.dataset.filter === filter)?.firstChild?.textContent?.trim();
+    statusEl.textContent = `${visible.length} réalisation${visible.length > 1 ? "s" : ""} affichée${visible.length > 1 ? "s" : ""}${filter === "all" ? "" : ` : ${label}`}`;
+  }
+
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter ?? "all";
+      applyFilter(filter);
+      history.replaceState(null, "", filter === "all" ? location.pathname : `#${filter}`);
+    })
+  );
+
+  const initial = location.hash.slice(1);
+  if ([...buttons].some((b) => b.dataset.filter === initial)) applyFilter(initial);
+
+  // — Visionneuse —
+  function show(pos: number) {
+    position = (pos + visible.length) % visible.length;
+    const img = GALLERY[visible[position]];
+    imgEl.src = img.url;
+    imgEl.alt = img.alt;
+    titleEl.textContent = img.title + (img.beforeAfter ? " · Avant / Après" : "");
+    prestEl.textContent = img.prestation;
+    countEl.textContent = `${position + 1} / ${visible.length}`;
+  }
+
+  document.querySelectorAll<HTMLButtonElement>("#realisations-grid button[data-index]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      show(visible.indexOf(Number(btn.dataset.index)));
+      dialog.showModal();
+    })
+  );
+
+  dialog.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const action = target.closest<HTMLElement>("[data-action]")?.dataset.action;
+    if (action === "close") dialog.close();
+    else if (action === "prev") show(position - 1);
+    else if (action === "next") show(position + 1);
+    else if (target === dialog || target.classList.contains("lightbox-inner")) dialog.close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!dialog.open) return;
+    if (e.key === "ArrowLeft") show(position - 1);
+    if (e.key === "ArrowRight") show(position + 1);
+  });
+
+  // Swipe sur mobile
+  let touchX = 0;
+  dialog.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  dialog.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) show(position + (dx < 0 ? 1 : -1));
+  });
+
+  // Bloque le scroll de la page quand la visionneuse est ouverte
+  const lockScroll = () => { document.body.style.overflow = dialog.open ? "hidden" : ""; };
+  dialog.addEventListener("close", lockScroll);
+  new MutationObserver(lockScroll).observe(dialog, { attributes: true, attributeFilter: ["open"] });
+</script>
